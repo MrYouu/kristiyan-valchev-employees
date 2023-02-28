@@ -1,0 +1,20 @@
+[
+   {
+      "employeeID": "143",
+      "projectID": "12",
+      "dateFrom": "2013-11-01",
+      "dateTo": "2014-01-05"
+   },
+   {
+      "employeeID": "218",
+      "projectID": "10",
+      "dateFrom": "2012-05-16",
+      "dateTo": null
+   },
+   {
+      "employeeID": "143",
+      "projectID": "10",
+      "dateFrom": "2009-01-01",
+      "dateTo": "2011-04-27"
+   }
+]

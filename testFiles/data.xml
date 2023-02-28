@@ -1,0 +1,19 @@
+<data>
+   <item>
+      <employeeID>143</employeeID>
+      <projectID>12</projectID>
+      <dateFrom>2013-11-01</dateFrom>
+      <dateTo>2014-01-05</dateTo>
+   </item>
+   <item>
+      <employeeID>218</employeeID>
+      <projectID>10</projectID>
+      <dateFrom>2012-05-16</dateFrom>
+   </item>
+   <item>
+      <employeeID>143</employeeID>
+      <projectID>10</projectID>
+      <dateFrom>2009-01-01</dateFrom>
+      <dateTo>2011-04-27</dateTo>
+   </item>
+</data>

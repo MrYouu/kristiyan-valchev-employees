@@ -1,0 +1,415 @@
+/* The CSS code is owned by Kristiyan Valchev and can only be viewed */
+/* You are not allowed to use any of the following code */
+
+/*
+   todo - 
+*/
+
+html
+{
+   font-family: "Mulish", sans-serif;
+   background-color: var(--backgroundColor);
+   scroll-behavior: smooth;
+   overflow-x: hidden;
+}
+
+body
+{
+   margin: 0;
+   overflow-x: hidden;
+   scroll-behavior: smooth;
+}
+
+/*#region Additions */
+* { -webkit-tap-highlight-color: transparent; }
+
+::selection
+{
+   color: #f8f8f8;
+   background: #006663;
+}
+
+::-moz-selection
+{
+   color: #f8f8f8;
+   background: #006663;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	height: 10px;
+}
+
+::-webkit-scrollbar-track
+{
+   background-color: #f8f8f8;
+   border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background: #e8e8e8;
+	border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover
+{ background: #d8d8d8; }
+/*#endregion Additions */
+
+:root
+{
+   --defaultSideSpace: 20px;
+
+   --primaryColor: #00b3ad;
+   --primaryColora0: #00b3ada0;
+   --primaryColor40: #00b3ad40;
+   --primaryColor10: #00b3ad10;
+
+   --accentColor: #b33f00;
+   --accentColora0: #b33f00a0;
+
+   --errorColor: #ff0000;
+
+   --backgroundColor: #f8f8f8;
+   --backgroundColor1down: #e8e8e8;
+   --backgroundColor2down: #d8d8d8;
+
+   --mainTextColor: #111111;
+   --mainTextColora0: #111111a0;
+   --buttonTextColor: #f8f8f8;
+}
+
+.Colors
+{
+   color: #111111;
+   color: #f8f8f8;
+
+   color: #662400;
+   color: #b33f00;
+   color: #ff6b1a;
+   color: #006663;
+   color: #00b3ad;
+}
+
+/*#region Main */
+.mainText,
+.normalText
+{
+   position: relative;
+   width: calc(100% - var(--defaultSideSpace) * 2);
+   height: auto;
+   top: 0;
+   left: 0;
+   color: var(--mainTextColor);
+   margin: 0px 0px 20px var(--defaultSideSpace);
+}
+
+.normalText { color: var(--mainTextColora0); }
+
+.mainText.weUnder,
+.normalText.weUnder { margin-bottom: 5px; }
+
+.mainText.nothingUnder,
+.normalText.nothingUnder,
+.mainText.total,
+.normalText.total { margin-bottom: 0; }
+
+.mainText.free,
+.normalText.free,
+.mainText.total,
+.normalText.total
+{
+   width: 100%;
+   margin-left: 0;
+}
+
+.required { padding-left: 15px; }
+
+.required::after
+{
+   content: "*";
+   position: absolute;
+   top: 0;
+   left: 0;
+   font-size: 20px;
+   font-weight: bolder;
+   color: #d63944;
+}
+
+.inlineIcon
+{
+   position: relative;
+   max-width: 20px;
+   max-height: 20px;
+   /* color: var(--mainTextColor); */
+   margin: 0px 5px;
+}
+/*#endregion Main */
+
+/*#region Spacer */
+.Spacer
+{
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   left: 0;
+}
+/*#endregion Spacer */
+
+/*#region Button */
+.Button
+{
+   position: relative;
+   width: fit-content;
+   height: auto;
+   top: 0;
+   left: 0;
+   font-family: "Mulish", sans-serif;
+   font-size: 16px;
+   text-decoration: none;
+   color: var(--buttonTextColor);
+   background-color: var(--primaryColor);
+   border: none;
+   border-radius: 10px;
+   margin: 0px 10px 20px var(--defaultSideSpace);
+   padding: 10px 20px;
+   box-sizing: border-box;
+   cursor: pointer;
+   user-select: none;
+}
+
+.Button.weUnder { margin-bottom: 5px; }
+
+.Button.nothingUnder,
+.Button.total { margin-bottom: 0; }
+
+.Button.free,
+.Button.total { margin-left: 0; }
+
+.Button.aCenter
+{
+   left: 50%;
+   transform: translateX(-50%);
+}
+
+.Button:last-child { margin-right: 0px; }
+
+.Button:hover { filter: brightness(.9); }
+
+.Button.secondary
+{
+   color: var(--mainTextColor);
+   background-color: var(--backgroundColor);
+}
+
+.Button svg
+{
+   position: relative;
+   max-width: 18px;
+   max-height: 18px;
+   margin-right: 10px;
+}
+/*#endregion Button */
+
+/*#region Table */
+.normalTable
+{
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   left: 0;
+   margin-bottom: 20px;
+   overflow-x: auto;
+   padding-bottom: 20px;
+}
+
+.normalTable .normalTableContent
+{
+   display: block;
+   position: relative;
+   width: fit-content;
+   min-width: calc(100% - var(--defaultSideSpace) * 2);
+   height: auto;
+   top: 0;
+   margin: 0px var(--defaultSideSpace);
+}
+
+.normalTable .normalTableContent table
+{
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   left: 0;
+   border-collapse: collapse;
+}
+
+.normalTable .normalTableContent table thead,
+.normalTable .normalTableContent table tbody
+{
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   left: 0;
+   border-radius: 10px;
+}
+
+.normalTable .normalTableContent table thead { background-color: var(--backgroundColor2down); }
+.normalTable .normalTableContent table tbody { background-color: var(--backgroundColor1down); }
+
+.normalTable .normalTableContent table tbody.normalTableContentDivider { height: 10px; }
+
+.normalTable .normalTableContent table thead tr th,
+.normalTable .normalTableContent table tbody tr th,
+.normalTable .normalTableContent table thead tr td,
+.normalTable .normalTableContent table tbody tr td
+{
+   position: relative;
+   height: auto;
+   text-align: left;
+   padding: 10px 20px;
+}
+
+.normalTable .normalTableContent table thead tr th:first-child { border-radius: 10px 0px 0px 10px; }
+.normalTable .normalTableContent table thead tr th:last-child { border-radius: 0px 10px 10px 0px; }
+
+.normalTable .normalTableContent table tbody tr:first-child td:first-child { border-top-left-radius: 10px; }
+.normalTable .normalTableContent table tbody tr:first-child td:last-child { border-top-right-radius: 10px; }
+.normalTable .normalTableContent table tbody tr:last-child td:first-child { border-bottom-left-radius: 10px; }
+.normalTable .normalTableContent table tbody tr:last-child td:last-child { border-bottom-right-radius: 10px; }
+/*#endregion Table */
+
+/*#region File drop area */
+.fileDropArea
+{
+   position: relative;
+   width: calc(100% - var(--defaultSideSpace) * 2);
+   max-width: 420px;
+   height: 200px;
+   top: 0;
+   left: 0;
+   border: dashed 3px var(--primaryColor);
+   border-radius: 10px;
+   margin: 0px auto 20px auto;
+   user-select: none;
+}
+
+.fileDropArea:hover,
+.fileDropArea.withFile { background-color: var(--primaryColor10); }
+
+.fileDropArea::before
+{
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: -3px;
+   left: -3px;
+   border: solid 3px var(--primaryColor);
+   border-radius: 10px;
+   opacity: 0;
+   pointer-events: none;
+}
+
+.fileDropArea.withFile::before { opacity: 1; }
+
+.fileDropArea input
+{
+   position: absolute;
+   pointer-events: none;
+   opacity: 0;
+}
+
+.fileDropArea label
+{
+   display: flex;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   cursor: pointer;
+
+   flex-direction: column;
+   justify-content: center;
+}
+
+.fileDropArea label * { pointer-events: none; }
+/*#endregion File drop area */
+
+/*#region 404 page */
+.page404Holder
+{
+   display: flex;
+   position: relative;
+   width: 100%;
+   height: 100svh;
+   top: 0;
+   left: 0;
+   background-image: linear-gradient(to bottom right, var(--primaryColor40), var(--primaryColor));
+
+   flex-direction: column;
+   justify-content: center;
+}
+/*#endregion 404 page */
+
+/*#region Other */
+.fw1 { font-weight: 100; }
+.fw2 { font-weight: 200; }
+.fw3 { font-weight: 300; }
+.fw4 { font-weight: 400; }
+.fw5 { font-weight: 500; }
+.fw6 { font-weight: 600; }
+.fw7 { font-weight: 700; }
+.fw8 { font-weight: 800; }
+.fw9 { font-weight: 900; }
+
+.fsItalic { font-style: italic; }
+
+.tdUnderline { text-decoration: underline; }
+
+.taLeft { text-align: left; }
+.taCenter { text-align: center; }
+.taRight { text-align: right; }
+
+.Spacer
+{
+   position: relative;
+   width: 100%;
+   height: auto;
+   top: 0;
+   left: 0;
+}
+
+.primaryColor { color: var(--primaryColor); }
+.normalText .primaryColor { color: var(--primaryColora0); }
+
+.accentColor { color: var(--accentColor); }
+.normalText .accentColor { color: var(--accentColora0); }
+
+.errorColor { color: var(--errorColor); }
+.normalText .errorColor { color: var(--errorColora0); }
+/*#endregion Other */
+
+/*#region thisRegion */
+
+/*#endregion thisRegion */
+
+p, a, div, h1, h2, h3, h4, h5, h6, table, th, span, svg, button, ::before, ::after
+{
+   transition: ease .3s;
+   margin: 0;
+   padding: 0;
+}
+
+@media screen and (max-width: 800px)
+{
+   :root
+   {
+      --defaultSideSpace: 10px;
+   }
+}
