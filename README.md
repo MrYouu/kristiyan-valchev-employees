@@ -1,6 +1,16 @@
-# Pair of employees who have worked together
+# Pair of employees who have worked together (create-react-app)
 
 ### ***Created by Kristiyan Valchev***
+
+<br>
+
+## Run locally
+
+      > npm run start
+
+## Build
+
+      > npm run build
 
 <br>
 
