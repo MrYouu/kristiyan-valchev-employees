@@ -47,6 +47,19 @@ export function getMonthText(month) {
    }
 }
 
+export function getTimeTogether(employeeData1, employeeData2) {
+   if (employeeData1.dateFrom >= employeeData2.dateFrom && employeeData1.dateFrom <= employeeData2.dateTo)
+      (employeeData1.workedWith = employeeData1.workedWith || {})[employeeData2.employeeID] = employeeData2.dateTo - employeeData1.dateFrom;
+   if (employeeData1.dateFrom <= employeeData2.dateFrom && employeeData1.dateTo >= employeeData2.dateFrom)
+      (employeeData1.workedWith = employeeData1.workedWith || {})[employeeData2.employeeID] = employeeData1.dateTo - employeeData2.dateFrom;
+   if (employeeData1.dateFrom <= employeeData2.dateFrom && employeeData1.dateTo >= employeeData2.dateTo)
+      (employeeData1.workedWith = employeeData1.workedWith || {})[employeeData2.employeeID] = employeeData2.dateTo - employeeData2.dateFrom;
+   if (employeeData1.dateFrom >= employeeData2.dateFrom && employeeData1.dateTo <= employeeData2.dateTo)
+      (employeeData1.workedWith = employeeData1.workedWith || {})[employeeData2.employeeID] = employeeData1.dateTo - employeeData1.dateFrom;
+
+   return employeeData1;
+}
+
 //* Other functions
 export function readFileContent(file, fileType) {
    return new Promise((resolve, reject) => {
@@ -87,11 +100,12 @@ export function constructRawDataObject(data, fromFileType) {
       const dateFromValues = thisElement[2]?.split("-");
       const dateToValues = thisElement[3]?.split("-");
 
+      //? Dates are calculated like that because of Safari support
       return {
          employeeID: thisElement[0],
          projectID: thisElement[1],
          dateFrom: parseInt(new Date(`${dateFromValues[1]}-${dateFromValues[2]}-${dateFromValues[0]}`).getTime()),
-         dateTo: !thisElement[3] || thisElement[3] === "NULL" ? null : parseInt(new Date(`${dateToValues[1]}-${dateToValues[2]}-${dateToValues[0]}`).getTime()),
+         dateTo: !thisElement[3] || thisElement[3] === "NULL" ? getDate() : parseInt(new Date(`${dateToValues[1]}-${dateToValues[2]}-${dateToValues[0]}`).getTime()),
       };
    }) : [];
 }

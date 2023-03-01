@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { supportedFileTypes, getFileExtension, readFileContent, constructRawDataObject, getDate, getFormattedDate } from "../../Utilities/services";
+import { supportedFileTypes, getFileExtension, readFileContent, constructRawDataObject, getFormattedDate, getTimeTogether, getDate } from "../../Utilities/services";
 
 import Spacer from "../Spacer";
 import Table from "../Table";
@@ -27,32 +27,41 @@ function Index() {
    useEffect(() => {
       if (fileContent.length === 0) return;
 
-      const readyData = Object.values(fileContent.map(thisElement => {
-         const dateTo = !thisElement.dateTo ? getDate() : thisElement.dateTo;
-
-         return {
-            employeeID: thisElement.employeeID,
-            projectID: thisElement.projectID,
-            timeWorked: dateTo - thisElement.dateFrom,
-         };
-      }).reduce((previousValue, currentValue) => {
+      const readyData = Object.values(fileContent.reduce((previousValue, currentValue) => {
          (previousValue[currentValue.projectID] = previousValue[currentValue.projectID] || []).push(currentValue);
          return previousValue;
       }, {})).map(thisElement => {
-         return thisElement.sort((a, b) => {
-            if (a.timeWorked < b.timeWorked) return 1;
-            if (a.timeWorked > b.timeWorked) return -1;
-            return 0;
+         for (let index = 0; index < thisElement.length; index++)
+            for (let index2 = 0; index2 < thisElement.length; index2++) {
+               if (index === index2) continue;
+
+               thisElement[index] = getTimeTogether(thisElement[index], thisElement[index2]);
+            }
+
+         return thisElement;
+      }).reduce((previousValue, currentValue) => {
+         const employeeDataWithColleague = currentValue.reduce((previousEmployeeData, currentEmployeeData) => {
+            if (!currentEmployeeData.workedWith) return previousEmployeeData;
+
+            return {
+               ...currentEmployeeData,
+               workedMostWithEmployeeID: Object.keys(currentEmployeeData.workedWith).reduce((previousEmployeeID, currentEmployeeID) => {
+                  if (!previousEmployeeID || currentEmployeeData.workedWith[previousEmployeeID] < currentEmployeeData.workedWith[currentEmployeeID])
+                     return currentEmployeeID;
+                  return previousEmployeeID;
+               }),
+            };
          });
-      }).sort((a, b) => {
-         if (a[0].timeWorked + a[1]?.timeWorked < b[0].timeWorked + b[1]?.timeWorked) return 1;
-         if (a[0].timeWorked + a[1]?.timeWorked > b[0].timeWorked + b[1]?.timeWorked) return -1;
-         return 0;
-      });
+         if (!employeeDataWithColleague.workedWith) return previousValue;
+
+         if (Object.keys(previousValue).length === 0 || previousValue.workedWith[previousValue.workedMostWithEmployeeID] < employeeDataWithColleague.workedWith[employeeDataWithColleague.workedMostWithEmployeeID])
+            return employeeDataWithColleague;
+         else return previousValue;
+      }, {});
 
       setWorkedTogetherData({
-         employeeID1: readyData[0][0]?.employeeID,
-         employeeID2: readyData[0][1]?.employeeID,
+         employeeID1: readyData.employeeID,
+         employeeID2: readyData.workedMostWithEmployeeID,
       });
    }, [fileContent]);
 
@@ -87,14 +96,13 @@ function Index() {
                            (previousValue[currentValue.projectID] = previousValue[currentValue.projectID] || []).push(currentValue);
                            return previousValue;
                         }, {})).filter(thisElement => thisElement.length === 2).map(thisElement => {
-                           const dateToEmployee1 = !thisElement[0].dateTo ? getDate() : thisElement[0].dateTo;
-                           const dateToEmployee2 = !thisElement[1].dateTo ? getDate() : thisElement[1].dateTo;
+                           thisElement[0] = getTimeTogether(thisElement[0], thisElement[1]);
 
                            return [
                               thisElement[0].employeeID,
                               thisElement[1].employeeID,
                               thisElement[0].projectID,
-                              `${parseInt(((dateToEmployee1 - thisElement[0].dateFrom) + (dateToEmployee2 - thisElement[1].dateFrom)) / 1000 / 60 / 60 / 24)} days`,
+                              `${parseInt(thisElement[0].workedWith[thisElement[1].employeeID] / 1000 / 60 / 60 / 24)} days`,
                            ];
                         })
                   }
@@ -109,12 +117,14 @@ function Index() {
                      "To date",
                   ]}
                   bodyElements={fileContent.map(thisElement => {
+                     const isPresent = getFormattedDate(thisElement.dateTo) === getFormattedDate(getDate());
+
                      return [
                         thisElement.employeeID,
                         thisElement.projectID,
                         getFormattedDate(thisElement.dateFrom),
-                        (<span className={thisElement.dateTo === null ? "fsItalic" : ""}>
-                           {thisElement.dateTo === null ? "present" : getFormattedDate(thisElement.dateTo)}
+                        (<span className={isPresent ? "fsItalic" : ""}>
+                           {isPresent ? "present" : getFormattedDate(thisElement.dateTo)}
                         </span>),
                      ];
                   })}

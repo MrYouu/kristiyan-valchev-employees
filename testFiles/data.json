@@ -16,5 +16,35 @@
       "projectID": "10",
       "dateFrom": "2009-01-01",
       "dateTo": "2011-04-27"
+   },
+   {
+      "employeeID": "34",
+      "projectID": "10",
+      "dateFrom": "2010-02-10",
+      "dateTo": "2010-03-28"
+   },
+   {
+      "employeeID": "182",
+      "projectID": "9",
+      "dateFrom": "2015-01-01",
+      "dateTo": null
+   },
+   {
+      "employeeID": "98",
+      "projectID": "12",
+      "dateFrom": "2014-01-02",
+      "dateTo": "2016-06-13"
+   },
+   {
+      "employeeID": "74",
+      "projectID": "9",
+      "dateFrom": "2017-05-18",
+      "dateTo": "2017-12-23"
+   },
+   {
+      "employeeID": "351",
+      "projectID": "4",
+      "dateFrom": "2016-07-24",
+      "dateTo": "2018-08-09"
    }
 ]
